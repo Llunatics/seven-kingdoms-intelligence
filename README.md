@@ -29,19 +29,19 @@ flowchart TD
         Nav["Liquid Glass Navbar & Cmd+K Search"]
         Hero["Hero & World Intel Dashboard"]
         Explorers["Characters / Houses / Books Explorers"]
-        GraphView["Interactive Knowledge Graph (React Flow)"]
+        GraphView["Interactive Knowledge Graph - React Flow"]
         CompareView["Side-by-Side Character Comparison"]
         AnalyticsView["Recharts Analytics Dashboard"]
         GameView["Trivia Lore Mini-Game"]
-        FavView["Favorites & Citadel Council (LocalStorage)"]
+        FavView["Favorites & Citadel Council - LocalStorage"]
     end
 
     subgraph ServerLayer ["Server Layer & API Routes"]
-        RouteHandlers["Next.js Route Handlers (/api/*)"]
+        RouteHandlers["Next.js Route Handlers - /api/*"]
         APIService["Intelligence API Service Layer"]
         CacheLayer[("Tier 1: In-Memory LRU / Tier 2: Redis")]
         DB[("Prisma ORM / PostgreSQL")]
-        FallbackEngine["Canonical Dataset Engine (Joakim Skoog Data)"]
+        FallbackEngine["Canonical Dataset Engine - Joakim Skoog Data"]
     end
 
     App --> Nav
@@ -53,8 +53,8 @@ flowchart TD
 
     RouteHandlers --> APIService
     APIService --> CacheLayer
-    APIService -->|External Request (3.5s Timeout)| ExtAPI["An API of Ice and Fire (/api)"]
-    APIService -.->|Failover on Timeout / Offline| FallbackEngine
+    APIService -->|External Request with 3.5s Timeout| ExtAPI["An API of Ice and Fire REST API"]
+    APIService -.->|Failover on Timeout or Offline| FallbackEngine
     APIService --> DB
 ```
 
