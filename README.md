@@ -22,34 +22,38 @@ Instead of a simple CRUD API demo, this platform provides an immersive, data-ori
 ## 🏗️ Architecture & Data Flow
 
 ```mermaid
-graph TD
-    User([User Browser]) -->|HTTP / React 19 / Next.js UI| App[Next.js App Router]
+flowchart TD
+    User(["User Browser"]) -->|HTTP / React 19 UI| App["Next.js App Router"]
     
-    subgraph Client UI Components
-        Nav[Liquid Glass Navbar & Command Search Cmd+K]
-        Hero[Hero & World Intel Dashboard]
-        Explorers[Characters / Houses / Books Explorers]
-        GraphView[Interactive Knowledge Graph - React Flow]
-        CompareView[Side-by-Side Character Comparison]
-        AnalyticsView[Recharts Analytics Dashboard]
-        GameView[Guess the Character Trivia Engine]
-        FavView[Favorites & Bookmarks - LocalStorage]
+    subgraph ClientUI ["Client UI Components"]
+        Nav["Liquid Glass Navbar & Cmd+K Search"]
+        Hero["Hero & World Intel Dashboard"]
+        Explorers["Characters / Houses / Books Explorers"]
+        GraphView["Interactive Knowledge Graph (React Flow)"]
+        CompareView["Side-by-Side Character Comparison"]
+        AnalyticsView["Recharts Analytics Dashboard"]
+        GameView["Trivia Lore Mini-Game"]
+        FavView["Favorites & Citadel Council (LocalStorage)"]
     end
 
-    App --> Client UI Components
-
-    subgraph Server Layer & API Routes
-        RouteHandlers[Next.js Route Handlers: /api/*]
-        APIService[Intelligence API Service Layer]
-        CacheLayer[(Tier 1: In-Memory LRU Cache / Tier 2: Redis)]
-        DB[(Prisma ORM / PostgreSQL)]
-        FallbackEngine[Canonical Dataset Engine: Joakim Skoog Data]
+    subgraph ServerLayer ["Server Layer & API Routes"]
+        RouteHandlers["Next.js Route Handlers (/api/*)"]
+        APIService["Intelligence API Service Layer"]
+        CacheLayer[("Tier 1: In-Memory LRU / Tier 2: Redis")]
+        DB[("Prisma ORM / PostgreSQL")]
+        FallbackEngine["Canonical Dataset Engine (Joakim Skoog Data)"]
     end
 
-    Client UI Components -->|Fetch / Server Actions| RouteHandlers
+    App --> Nav
+    App --> Hero
+    Explorers -->|HTTP Fetch / API| RouteHandlers
+    Nav -->|Search API| RouteHandlers
+    GraphView -->|Graph API| RouteHandlers
+    AnalyticsView -->|Stats API| RouteHandlers
+
     RouteHandlers --> APIService
     APIService --> CacheLayer
-    APIService -->|External Call with Timeout| ExtAPI[An API of Ice and Fire /api]
+    APIService -->|External Request (3.5s Timeout)| ExtAPI["An API of Ice and Fire (/api)"]
     APIService -.->|Failover on Timeout / Offline| FallbackEngine
     APIService --> DB
 ```
