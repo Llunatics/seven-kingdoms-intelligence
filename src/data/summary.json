@@ -1,0 +1,217 @@
+{
+  "totalCharacters": 2134,
+  "totalHouses": 444,
+  "totalBooks": 12,
+  "namedCharacters": 2124,
+  "povCharactersCount": 31,
+  "cultureDistribution": [
+    {
+      "name": "Northmen",
+      "count": 137
+    },
+    {
+      "name": "Ironborn",
+      "count": 127
+    },
+    {
+      "name": "Free Folk",
+      "count": 70
+    },
+    {
+      "name": "Valyrian",
+      "count": 57
+    },
+    {
+      "name": "Braavosi",
+      "count": 46
+    },
+    {
+      "name": "Dornish",
+      "count": 42
+    },
+    {
+      "name": "Ghiscari",
+      "count": 35
+    },
+    {
+      "name": "Dothraki",
+      "count": 23
+    },
+    {
+      "name": "Rivermen",
+      "count": 22
+    },
+    {
+      "name": "Valemen",
+      "count": 20
+    },
+    {
+      "name": "Reach",
+      "count": 16
+    },
+    {
+      "name": "Westeros",
+      "count": 14
+    },
+    {
+      "name": "Westerman",
+      "count": 14
+    },
+    {
+      "name": "Stormlands",
+      "count": 10
+    },
+    {
+      "name": "Tyroshi",
+      "count": 9
+    }
+  ],
+  "regionDistribution": [
+    {
+      "name": "The Reach",
+      "count": 72
+    },
+    {
+      "name": "The North",
+      "count": 61
+    },
+    {
+      "name": "The Westerlands",
+      "count": 55
+    },
+    {
+      "name": "The Riverlands",
+      "count": 52
+    },
+    {
+      "name": "The Crownlands",
+      "count": 49
+    },
+    {
+      "name": "The Stormlands",
+      "count": 38
+    },
+    {
+      "name": "Iron Islands",
+      "count": 38
+    },
+    {
+      "name": "The Vale",
+      "count": 35
+    },
+    {
+      "name": "Dorne",
+      "count": 29
+    },
+    {
+      "name": "The Neck",
+      "count": 7
+    },
+    {
+      "name": "Beyond the Wall",
+      "count": 1
+    },
+    {
+      "name": "None",
+      "count": 1
+    }
+  ],
+  "bookStats": [
+    {
+      "id": 1,
+      "name": "A Game of Thrones",
+      "pages": 694,
+      "year": 1996,
+      "charactersCount": 434,
+      "povCharactersCount": 9
+    },
+    {
+      "id": 2,
+      "name": "A Clash of Kings",
+      "pages": 768,
+      "year": 1999,
+      "charactersCount": 778,
+      "povCharactersCount": 10
+    },
+    {
+      "id": 3,
+      "name": "A Storm of Swords",
+      "pages": 992,
+      "year": 2000,
+      "charactersCount": 1021,
+      "povCharactersCount": 12
+    },
+    {
+      "id": 4,
+      "name": "The Hedge Knight",
+      "pages": 164,
+      "year": 2005,
+      "charactersCount": 54,
+      "povCharactersCount": 1
+    },
+    {
+      "id": 5,
+      "name": "A Feast for Crows",
+      "pages": 784,
+      "year": 2005,
+      "charactersCount": 1241,
+      "povCharactersCount": 12
+    },
+    {
+      "id": 6,
+      "name": "The Sworn Sword",
+      "pages": 152,
+      "year": 2008,
+      "charactersCount": 84,
+      "povCharactersCount": 1
+    },
+    {
+      "id": 7,
+      "name": "The Mystery Knight",
+      "pages": 416,
+      "year": 2011,
+      "charactersCount": 71,
+      "povCharactersCount": 1
+    },
+    {
+      "id": 8,
+      "name": "A Dance with Dragons",
+      "pages": 1040,
+      "year": 2011,
+      "charactersCount": 861,
+      "povCharactersCount": 18
+    },
+    {
+      "id": 9,
+      "name": "The Princess and the Queen",
+      "pages": 784,
+      "year": 2013,
+      "charactersCount": 57,
+      "povCharactersCount": 0
+    },
+    {
+      "id": 10,
+      "name": "The Rogue Prince",
+      "pages": 832,
+      "year": 2014,
+      "charactersCount": 55,
+      "povCharactersCount": 0
+    },
+    {
+      "id": 11,
+      "name": "The World of Ice and Fire",
+      "pages": 336,
+      "year": 2014,
+      "charactersCount": 265,
+      "povCharactersCount": 0
+    },
+    {
+      "id": 12,
+      "name": "A Knight of the Seven Kingdoms",
+      "pages": 368,
+      "year": 2015,
+      "charactersCount": 0,
+      "povCharactersCount": 0
+    }
+  ]
+}

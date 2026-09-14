@@ -1,0 +1,40 @@
+// Seven Kingdoms Intelligence Prisma Schema
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Favorite {
+  id        String   @id @default(cuid())
+  userId    String?  // Optional for authenticated sessions; client-side UUID default
+  entityType String  // "character" | "house" | "book"
+  entityId  Int
+  name      String
+  subtitle  String?
+  createdAt DateTime @default(now())
+
+  @@unique([userId, entityType, entityId])
+  @@index([entityType, entityId])
+}
+
+model GameScore {
+  id          String   @id @default(cuid())
+  playerName  String   @default("Anonymous Lord")
+  score       Int
+  streak      Int
+  playedAt    DateTime @default(now())
+
+  @@index([score])
+}
+
+model CacheEntry {
+  key       String   @id
+  value     String   // Serialized JSON
+  expiresAt DateTime
+
+  @@index([expiresAt])
+}
