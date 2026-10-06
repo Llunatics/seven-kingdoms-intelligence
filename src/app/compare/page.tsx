@@ -17,6 +17,7 @@ import {
   ArrowRight,
 } from "lucide-react";
 import { GlassCard, GlassBadge } from "@/components/ui/glass-card";
+import { PageHeader } from "@/components/ui/page-header";
 import { Character, SearchResult } from "@/types/api";
 
 function CompareContent() {
@@ -110,24 +111,17 @@ function CompareContent() {
   return (
     <div className="space-y-8 max-w-6xl mx-auto">
       {/* Header */}
-      <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 border-b border-white/5 pb-6">
-        <div className="space-y-2">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-gold-950/40 border border-gold-500/20 text-gold-400 text-xs font-medium">
-            <Scale className="w-3.5 h-3.5" />
-            <span>Comparative Intelligence Matrix</span>
+      <PageHeader
+        icon={Scale}
+        badge="Comparative Intelligence Matrix"
+        title="Character Comparison"
+        description="Place up to 3 figures side-by-side to contrast noble allegiances, book chronology, and screen adaptation data."
+        actions={
+          <div className="text-xs text-slate-500 font-mono">
+            <span>{selectedChars.length} of 3 Candidates Selected</span>
           </div>
-          <h1 className="text-3xl sm:text-4xl font-bold font-serif text-slate-100">
-            Character Comparison
-          </h1>
-          <p className="text-sm text-slate-400 max-w-2xl">
-            Place up to 3 figures side-by-side to contrast noble allegiances, book chronology, and screen adaptation data.
-          </p>
-        </div>
-
-        <div className="text-xs text-slate-500 font-mono">
-          <span>{selectedChars.length} of 3 Candidates Selected</span>
-        </div>
-      </div>
+        }
+      />
 
       {/* Character Selector Header Slots */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -190,16 +184,17 @@ function CompareContent() {
 
       {/* Comparison Data Matrix */}
       {selectedChars.length > 0 ? (
-        <div className="glass-panel rounded-2xl border border-white/10 overflow-hidden shadow-2xl">
+        <div className="glass-panel rounded-2xl border border-white/10 overflow-hidden shadow-2xl relative">
+          <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-gold-500/50 to-transparent" aria-hidden="true" />
           <div className="overflow-x-auto">
             <table className="w-full text-left text-xs border-collapse">
               <thead>
-                <tr className="bg-slate-900/80 border-b border-white/10">
+                <tr className="bg-slate-900/80 border-b border-gold-500/20">
                   <th className="p-4 font-mono uppercase tracking-wider text-slate-400 w-1/4">
                     Dimension
                   </th>
                   {selectedChars.map((c) => (
-                    <th key={c.id} className="p-4 font-serif text-sm font-bold text-slate-100">
+                    <th key={c.id} className="p-4 font-display text-base font-bold text-gold-300 tracking-wide">
                       {c.name || c.aliases[0] || `Character #${c.id}`}
                     </th>
                   ))}

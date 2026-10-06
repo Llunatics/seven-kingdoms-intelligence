@@ -7,7 +7,8 @@ export function LoadingSkeleton({ count = 8 }: { count?: number }) {
       {Array.from({ length: count }).map((_, i) => (
         <div
           key={i}
-          className="glass-panel p-5 rounded-xl border border-white/5 space-y-4 animate-pulse"
+          className="glass-panel p-5 rounded-xl border border-white/5 space-y-4 shimmer-sweep"
+          style={{ animationDelay: `${(i % 4) * 0.15}s` }}
         >
           <div className="flex items-center justify-between">
             <div className="h-5 bg-white/10 rounded w-2/3" />

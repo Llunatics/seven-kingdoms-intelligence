@@ -27,9 +27,10 @@ import {
   Sparkles,
 } from "lucide-react";
 import { GlassCard, GlassBadge } from "@/components/ui/glass-card";
+import { PageHeader } from "@/components/ui/page-header";
 import { AnalyticsSummary } from "@/types/api";
 
-const PIE_COLORS = ["#dfb76c", "#38bdf8", "#a855f7", "#34d399", "#f87171", "#fb923c"];
+const PIE_COLORS = ["#dfb76c", "#c89b3c", "#8e6c23", "#38bdf8", "#34d399", "#f87171"];
 
 export default function AnalyticsPage() {
   const [data, setData] = useState<AnalyticsSummary | null>(null);
@@ -76,18 +77,12 @@ export default function AnalyticsPage() {
   return (
     <div className="space-y-10 max-w-7xl mx-auto">
       {/* Header */}
-      <div className="space-y-2 border-b border-white/5 pb-6">
-        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-gold-950/40 border border-gold-500/20 text-gold-400 text-xs font-medium">
-          <BarChart3 className="w-3.5 h-3.5" />
-          <span>Macro Data Intelligence</span>
-        </div>
-        <h1 className="text-3xl sm:text-4xl font-bold font-serif text-slate-100">
-          Realm Analytics & Demographics
-        </h1>
-        <p className="text-sm text-slate-400 max-w-2xl">
-          Empirical distributions and longitudinal analysis synthesized from George R.R. Martin&apos;s canonical works.
-        </p>
-      </div>
+      <PageHeader
+        icon={BarChart3}
+        badge="Macro Data Intelligence"
+        title="Realm Analytics & Demographics"
+        description="Empirical distributions and longitudinal analysis synthesized from George R.R. Martin's canonical works."
+      />
 
       {/* Top Stat Summary Cards */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
@@ -115,7 +110,7 @@ export default function AnalyticsPage() {
 
         <GlassCard variant="interactive" className="space-y-1">
           <span className="text-xs text-slate-400">Viewpoint Leaders</span>
-          <div className="text-3xl font-bold text-purple-400 font-serif">
+          <div className="text-3xl font-bold text-gold-400 font-serif">
             {data.povCharactersCount}
           </div>
           <span className="text-[11px] text-slate-500">POV chapter characters</span>

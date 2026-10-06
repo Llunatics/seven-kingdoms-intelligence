@@ -97,9 +97,10 @@ export function SearchCommand({ isOpen, onClose }: SearchCommandProps) {
       onClick={onClose}
     >
       <div
-        className="w-full max-w-2xl glass-panel rounded-2xl border border-white/15 overflow-hidden shadow-2xl"
+        className="w-full max-w-2xl glass-panel rounded-2xl border border-white/15 overflow-hidden shadow-2xl relative"
         onClick={(e) => e.stopPropagation()}
       >
+        <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-gold-500/60 to-transparent" aria-hidden="true" />
         {/* Search Input Bar */}
         <div className="flex items-center px-4 py-3.5 border-b border-white/10 bg-slate-900/60">
           <Search className="w-5 h-5 text-gold-400 mr-3 shrink-0" />
@@ -160,7 +161,7 @@ export function SearchCommand({ isOpen, onClose }: SearchCommandProps) {
                           ? "bg-amber-950/40 text-gold-400 border-gold-500/30"
                           : item.type === "house"
                           ? "bg-blue-950/40 text-blue-400 border-blue-500/30"
-                          : "bg-purple-950/40 text-purple-400 border-purple-500/30"
+                          : "bg-emerald-950/40 text-emerald-400 border-emerald-500/30"
                       }`}
                     >
                       {item.type === "character" && <User className="w-4 h-4" />}
@@ -176,7 +177,7 @@ export function SearchCommand({ isOpen, onClose }: SearchCommandProps) {
                               ? "bg-amber-500/10 text-gold-400 border-gold-500/20"
                               : item.type === "house"
                               ? "bg-blue-500/10 text-blue-400 border-blue-500/20"
-                              : "bg-purple-500/10 text-purple-400 border-purple-500/20"
+                              : "bg-emerald-500/10 text-emerald-400 border-emerald-500/20"
                           }`}
                         >
                           {item.type}

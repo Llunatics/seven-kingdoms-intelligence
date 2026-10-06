@@ -77,17 +77,19 @@ export function Navbar() {
   return (
     <>
       <header className="sticky top-0 sm:top-3 z-40 w-full px-2 sm:px-6 transition-all">
-        <div className="mx-auto max-w-7xl glass-panel rounded-none sm:rounded-2xl border-x-0 sm:border-x border-t-0 sm:border-t border-b border-white/10 px-4 py-2.5 sm:py-3 flex items-center justify-between shadow-2xl">
+        <div className="mx-auto max-w-7xl glass-panel rounded-none sm:rounded-2xl border-x-0 sm:border-x border-t-0 sm:border-t border-b border-white/10 px-4 py-2.5 sm:py-3 flex items-center justify-between shadow-2xl relative overflow-hidden">
+          {/* Gold hairline along the top edge */}
+          <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-gold-500/60 to-transparent" aria-hidden="true" />
           {/* Logo & Brand */}
           <NextLink href="/" className="flex items-center gap-2.5 group">
-            <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-gold-500/30 to-amber-950/50 border border-gold-500/40 flex items-center justify-center text-gold-400 group-hover:border-gold-400 transition-all shadow-sm">
+            <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-gold-500/30 to-amber-950/50 border border-gold-500/40 flex items-center justify-center text-gold-400 group-hover:border-gold-400 group-hover:shadow-[0_0_16px_rgba(200,155,60,0.35)] transition-all shadow-sm">
               <Crown className="w-5 h-5 group-hover:scale-110 transition-transform" />
             </div>
             <div className="flex flex-col">
-              <span className="text-xs font-semibold tracking-widest text-gold-400 uppercase font-mono leading-tight">
+              <span className="text-[10px] font-semibold tracking-[0.28em] text-gold-400 uppercase font-mono leading-tight">
                 Seven Kingdoms
               </span>
-              <span className="text-sm font-bold tracking-wider text-slate-100 uppercase leading-none">
+              <span className="text-base font-bold tracking-[0.14em] text-slate-100 uppercase leading-none font-display">
                 Intelligence
               </span>
             </div>
@@ -102,7 +104,7 @@ export function Navbar() {
                 <NextLink
                   key={link.name}
                   href={link.href}
-                  className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium transition-all ${
+                  className={`relative flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium transition-all ${
                     isActive
                       ? "bg-slate-800 text-gold-300 border border-gold-500/30 shadow-sm"
                       : "text-slate-400 hover:text-slate-100 hover:bg-slate-800/50"
@@ -110,6 +112,9 @@ export function Navbar() {
                 >
                   <Icon className="w-3.5 h-3.5" />
                   <span>{link.name}</span>
+                  {isActive && (
+                    <span className="absolute -bottom-[1px] left-3 right-3 h-px bg-gradient-to-r from-transparent via-gold-400 to-transparent" aria-hidden="true" />
+                  )}
                 </NextLink>
               );
             })}

@@ -17,13 +17,153 @@ body {
   color: var(--foreground);
   background-color: var(--background);
   font-family: var(--font-sans), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  background-image: 
+  background-image:
+    radial-gradient(ellipse 80% 50% at 50% -10%, rgba(200, 155, 60, 0.07) 0%, transparent 60%),
     radial-gradient(circle at 15% 15%, rgba(200, 155, 60, 0.04) 0%, transparent 40%),
     radial-gradient(circle at 85% 85%, rgba(30, 41, 59, 0.25) 0%, transparent 45%),
     linear-gradient(to bottom, #08090d, #0b0e14 50%, #08090d 100%);
   background-attachment: fixed;
   min-height: 100vh;
   overflow-x: hidden;
+}
+
+::selection {
+  background: rgba(200, 155, 60, 0.35);
+  color: #fdf8ee;
+}
+
+/* ---- Maester's Citadel atmosphere utilities ---- */
+
+/* Candlelit radial glow for hero / feature sections */
+.candle-glow {
+  position: relative;
+}
+.candle-glow::before {
+  content: "";
+  position: absolute;
+  inset: -10% -20%;
+  pointer-events: none;
+  background: radial-gradient(
+    ellipse 60% 55% at 50% 30%,
+    rgba(223, 183, 108, 0.09) 0%,
+    rgba(200, 155, 60, 0.04) 40%,
+    transparent 70%
+  );
+  animation: candle-flicker 7s ease-in-out infinite;
+}
+
+@keyframes candle-flicker {
+  0%, 100% { opacity: 1; }
+  30% { opacity: 0.86; }
+  55% { opacity: 0.96; }
+  75% { opacity: 0.9; }
+}
+
+/* Decorative divider: hairline rules with a gold diamond sigil */
+.rune-divider {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+}
+.rune-divider::before,
+.rune-divider::after {
+  content: "";
+  height: 1px;
+  flex: 1;
+  background: linear-gradient(
+    to right,
+    transparent,
+    rgba(200, 155, 60, 0.45) 30%,
+    rgba(200, 155, 60, 0.45) 70%,
+    transparent
+  );
+}
+.rune-divider > .rune-diamond {
+  width: 7px;
+  height: 7px;
+  transform: rotate(45deg);
+  background: linear-gradient(135deg, #dfb76c, #8e6c23);
+  box-shadow: 0 0 10px rgba(223, 183, 108, 0.6);
+  flex-shrink: 0;
+}
+
+/* Subtle parchment grain, CSS-only */
+.parchment-sheen {
+  background-image:
+    repeating-linear-gradient(
+      0deg,
+      rgba(255, 255, 255, 0.012) 0px,
+      rgba(255, 255, 255, 0.012) 1px,
+      transparent 1px,
+      transparent 4px
+    );
+}
+
+/* Iron frame: double hairline border for featured panels */
+.iron-frame {
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  outline: 1px solid rgba(0, 0, 0, 0.5);
+  outline-offset: 3px;
+}
+
+/* Floating ember particles (subtle, decorative) */
+.ember-field {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+.ember {
+  position: absolute;
+  bottom: -2%;
+  border-radius: 9999px;
+  background: radial-gradient(circle, rgba(223, 183, 108, 0.9) 0%, rgba(200, 155, 60, 0) 70%);
+  animation: ember-rise linear infinite;
+  opacity: 0;
+}
+@keyframes ember-rise {
+  0% {
+    transform: translateY(0) translateX(0) scale(1);
+    opacity: 0;
+  }
+  12% { opacity: 0.7; }
+  60% { opacity: 0.35; }
+  100% {
+    transform: translateY(-46vh) translateX(2.5rem) scale(0.4);
+    opacity: 0;
+  }
+}
+
+/* Slow drift for ambient background sigils */
+@keyframes drift-slow {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-12px); }
+}
+.animate-drift-slow {
+  animation: drift-slow 9s ease-in-out infinite;
+}
+
+/* Shimmer sweep for loading skeletons */
+.shimmer-sweep {
+  position: relative;
+  overflow: hidden;
+}
+.shimmer-sweep::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    100deg,
+    transparent 30%,
+    rgba(223, 183, 108, 0.08) 50%,
+    transparent 70%
+  );
+  background-size: 200% 100%;
+  animation: shimmer-slide 1.8s ease-in-out infinite;
+}
+@keyframes shimmer-slide {
+  0% { background-position: 180% 0; }
+  100% { background-position: -80% 0; }
 }
 
 /* Liquid Glass System */

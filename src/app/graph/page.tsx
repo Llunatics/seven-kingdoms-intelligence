@@ -78,12 +78,12 @@ function HouseNode({ data }: { data: any }) {
 
 function BookNode({ data }: { data: any }) {
   return (
-    <div className="px-3.5 py-2.5 rounded-xl glass-panel border border-purple-500/40 hover:border-purple-400 bg-slate-900/90 text-slate-100 shadow-xl transition-all cursor-pointer min-w-[150px] max-w-[200px]">
-      <Handle type="target" position={Position.Top} className="!bg-purple-400 !w-2 !h-2" />
+    <div className="px-3.5 py-2.5 rounded-xl glass-panel border border-emerald-500/40 hover:border-emerald-400 bg-slate-900/90 text-slate-100 shadow-xl transition-all cursor-pointer min-w-[150px] max-w-[200px]">
+      <Handle type="target" position={Position.Top} className="!bg-emerald-400 !w-2 !h-2" />
       <div className="flex items-center gap-1.5 mb-1">
-        <BookOpen className="w-3.5 h-3.5 text-purple-400 shrink-0" />
-        <span className="text-[10px] font-mono text-purple-400 font-bold uppercase tracking-wider">
-          Book
+        <BookOpen className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
+        <span className="text-[10px] font-mono text-emerald-400 font-bold uppercase tracking-wider">
+          Chronicle
         </span>
       </div>
       <div className="font-bold text-xs font-serif text-slate-100 truncate">
@@ -92,7 +92,7 @@ function BookNode({ data }: { data: any }) {
       {data.subtitle && (
         <div className="text-[10px] text-slate-400 truncate mt-0.5">{data.subtitle}</div>
       )}
-      <Handle type="source" position={Position.Bottom} className="!bg-purple-400 !w-2 !h-2" />
+      <Handle type="source" position={Position.Bottom} className="!bg-emerald-400 !w-2 !h-2" />
     </div>
   );
 }
@@ -200,7 +200,7 @@ export default function GraphPage() {
             <GitBranch className="w-5 h-5" />
           </div>
           <div>
-            <h1 className="text-xl font-bold font-serif text-slate-100 flex items-center gap-2">
+            <h1 className="text-xl font-bold font-display tracking-wide text-slate-100 flex items-center gap-2">
               <span>Interactive Knowledge Graph</span>
               <GlassBadge color="gold">React Flow</GlassBadge>
             </h1>
@@ -251,7 +251,7 @@ export default function GraphPage() {
             <button
               onClick={() => setIncludeBooks(!includeBooks)}
               className={`px-2.5 py-1 rounded transition-all ${
-                includeBooks ? "bg-purple-500/20 text-purple-300 font-bold" : "text-slate-500"
+                includeBooks ? "bg-emerald-500/20 text-emerald-300 font-bold" : "text-slate-500"
               }`}
             >
               Books
@@ -262,6 +262,22 @@ export default function GraphPage() {
 
       {/* Graph Canvas Workspace with Floating Side-Over Details Panel */}
       <div className="relative w-full h-[72vh] glass-panel rounded-2xl border border-white/10 overflow-hidden shadow-2xl">
+        {/* Loading overlay while the graph assembles */}
+        {isLoading && (
+          <div className="absolute inset-0 z-30 flex flex-col items-center justify-center gap-4 bg-[#0b0e14]/80 backdrop-blur-sm">
+            <div className="relative">
+              <div className="w-12 h-12 rounded-full border-2 border-gold-500/20 border-t-gold-400 animate-spin" />
+              <GitBranch className="w-5 h-5 text-gold-400 absolute inset-0 m-auto" />
+            </div>
+            <p className="text-sm text-slate-300 font-display tracking-wide">
+              Charting the realm&apos;s allegiances…
+            </p>
+            <p className="text-[11px] text-slate-500 font-mono">
+              Consulting the Citadel archives
+            </p>
+          </div>
+        )}
+
         <ReactFlow
           nodes={nodes}
           edges={edges}
@@ -280,7 +296,7 @@ export default function GraphPage() {
             className="!bg-slate-950/80 !border-white/10 rounded-xl overflow-hidden shadow-lg hidden sm:block"
             nodeColor={(node: any) => {
               if (node.type === "houseNode") return "#3b82f6";
-              if (node.type === "bookNode") return "#a855f7";
+              if (node.type === "bookNode") return "#34d399";
               return "#c89b3c";
             }}
           />
@@ -300,7 +316,7 @@ export default function GraphPage() {
             <span>House</span>
           </div>
           <div className="flex items-center gap-2">
-            <span className="w-2.5 h-2.5 rounded-full bg-purple-400" />
+            <span className="w-2.5 h-2.5 rounded-full bg-emerald-400" />
             <span>Chronicle Book</span>
           </div>
         </div>

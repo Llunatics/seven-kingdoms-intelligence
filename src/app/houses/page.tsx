@@ -14,6 +14,7 @@ import {
   Users,
 } from "lucide-react";
 import { GlassCard, GlassBadge } from "@/components/ui/glass-card";
+import { PageHeader } from "@/components/ui/page-header";
 import { FavoriteButton } from "@/components/ui/favorite-button";
 import { Pagination } from "@/components/ui/pagination";
 import { LoadingSkeleton, EmptyState, ErrorState } from "@/components/ui/states";
@@ -108,53 +109,47 @@ export default function HousesPage() {
   return (
     <div className="space-y-8">
       {/* Header */}
-      <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b border-white/5 pb-6">
-        <div className="space-y-2">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-950/40 border border-blue-500/20 text-blue-400 text-xs font-medium">
-            <Shield className="w-3.5 h-3.5" />
-            <span>Heraldry & Dynasty Registry</span>
-          </div>
-          <h1 className="text-3xl sm:text-4xl font-bold font-serif text-slate-100">
-            House Explorer
-          </h1>
-          <p className="text-sm text-slate-400 max-w-2xl">
-            Survey 444 noble lineages, ancient ancestral seats, house mottos, and blazoned heraldry across the realms.
-          </p>
-        </div>
-
-        <div className="flex items-center gap-3">
-          <Link
-            href="/graph"
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-xl glass-panel text-slate-300 hover:text-slate-100 text-xs font-medium border border-white/10"
-          >
-            <span>View in Graph</span>
-          </Link>
-          <div className="flex items-center p-1 rounded-xl bg-slate-900/60 border border-white/10">
-            <button
-              onClick={() => setViewMode("grid")}
-              aria-label="Grid view"
-              className={`p-1.5 rounded-lg transition-all ${
-                viewMode === "grid"
-                  ? "bg-gold-500/20 text-gold-400"
-                  : "text-slate-400 hover:text-slate-200"
-              }`}
-            >
-              <Grid className="w-4 h-4" />
-            </button>
-            <button
-              onClick={() => setViewMode("list")}
-              aria-label="List view"
-              className={`p-1.5 rounded-lg transition-all ${
-                viewMode === "list"
-                  ? "bg-gold-500/20 text-gold-400"
-                  : "text-slate-400 hover:text-slate-200"
-              }`}
-            >
-              <List className="w-4 h-4" />
-            </button>
-          </div>
-        </div>
-      </div>
+      <PageHeader
+        icon={Shield}
+        badge="Heraldry & Dynasty Registry"
+        title="House Explorer"
+        description="Survey 444 noble lineages, ancient ancestral seats, house mottos, and blazoned heraldry across the realms."
+        tone="blue"
+        actions={
+                  <div className="flex items-center gap-3">
+                    <Link
+                      href="/graph"
+                      className="inline-flex items-center gap-2 px-4 py-2 rounded-xl glass-panel text-slate-300 hover:text-slate-100 text-xs font-medium border border-white/10"
+                    >
+                      <span>View in Graph</span>
+                    </Link>
+                    <div className="flex items-center p-1 rounded-xl bg-slate-900/60 border border-white/10">
+                      <button
+                        onClick={() => setViewMode("grid")}
+                        aria-label="Grid view"
+                        className={`p-1.5 rounded-lg transition-all ${
+                          viewMode === "grid"
+                            ? "bg-gold-500/20 text-gold-400"
+                            : "text-slate-400 hover:text-slate-200"
+                        }`}
+                      >
+                        <Grid className="w-4 h-4" />
+                      </button>
+                      <button
+                        onClick={() => setViewMode("list")}
+                        aria-label="List view"
+                        className={`p-1.5 rounded-lg transition-all ${
+                          viewMode === "list"
+                            ? "bg-gold-500/20 text-gold-400"
+                            : "text-slate-400 hover:text-slate-200"
+                        }`}
+                      >
+                        <List className="w-4 h-4" />
+                      </button>
+                    </div>
+                  </div>
+        }
+      />
 
       {/* Filter & Search Bar */}
       <div className="glass-panel p-4 sm:p-5 rounded-2xl border border-white/10 space-y-4">
@@ -247,7 +242,7 @@ export default function HousesPage() {
               }}
               className={`px-3 py-1.5 rounded-lg border transition-all ${
                 hasWeapons
-                  ? "bg-purple-500/20 text-purple-300 border-purple-500/40"
+                  ? "bg-slate-700/50 text-slate-200 border-white/20"
                   : "bg-slate-800/40 text-slate-400 border-white/5 hover:text-slate-200"
               }`}
             >
@@ -338,7 +333,7 @@ export default function HousesPage() {
                     {h.swornMemberIds.length}
                   </span>
                   {h.ancestralWeapons.length > 0 && (
-                    <span title="Ancestral Weapons" className="flex items-center gap-1 text-purple-400">
+                    <span title="Ancestral Weapons" className="flex items-center gap-1 text-slate-300">
                       <Sword className="w-3.5 h-3.5" />
                       {h.ancestralWeapons.length}
                     </span>

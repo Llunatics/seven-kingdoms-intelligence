@@ -16,6 +16,7 @@ import {
   X,
 } from "lucide-react";
 import { GlassCard, GlassBadge } from "@/components/ui/glass-card";
+import { PageHeader } from "@/components/ui/page-header";
 import { FavoriteButton } from "@/components/ui/favorite-button";
 import { Pagination } from "@/components/ui/pagination";
 import { LoadingSkeleton, EmptyState, ErrorState } from "@/components/ui/states";
@@ -120,53 +121,46 @@ export default function CharactersPage() {
   return (
     <div className="space-y-8">
       {/* Header */}
-      <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b border-white/5 pb-6">
-        <div className="space-y-2">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-gold-950/40 border border-gold-500/20 text-gold-400 text-xs font-medium">
-            <Users className="w-3.5 h-3.5" />
-            <span>Personnel & Lineage Intelligence</span>
-          </div>
-          <h1 className="text-3xl sm:text-4xl font-bold font-serif text-slate-100">
-            Character Explorer
-          </h1>
-          <p className="text-sm text-slate-400 max-w-2xl">
-            Query over 2,100 figures, sworn commanders, bastards, and monarchs across Westeros and the Free Cities.
-          </p>
-        </div>
-
-        <div className="flex items-center gap-3">
-          <Link
-            href="/compare"
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-xl glass-panel text-slate-300 hover:text-slate-100 text-xs font-medium border border-white/10"
-          >
-            <span>Compare Characters</span>
-          </Link>
-          <div className="flex items-center p-1 rounded-xl bg-slate-900/60 border border-white/10">
-            <button
-              onClick={() => setViewMode("grid")}
-              aria-label="Grid view"
-              className={`p-1.5 rounded-lg transition-all ${
-                viewMode === "grid"
-                  ? "bg-gold-500/20 text-gold-400"
-                  : "text-slate-400 hover:text-slate-200"
-              }`}
-            >
-              <Grid className="w-4 h-4" />
-            </button>
-            <button
-              onClick={() => setViewMode("list")}
-              aria-label="List view"
-              className={`p-1.5 rounded-lg transition-all ${
-                viewMode === "list"
-                  ? "bg-gold-500/20 text-gold-400"
-                  : "text-slate-400 hover:text-slate-200"
-              }`}
-            >
-              <List className="w-4 h-4" />
-            </button>
-          </div>
-        </div>
-      </div>
+      <PageHeader
+        icon={Users}
+        badge="Personnel & Lineage Intelligence"
+        title="Character Explorer"
+        description="Query over 2,100 figures, sworn commanders, bastards, and monarchs across Westeros and the Free Cities."
+        actions={
+                  <div className="flex items-center gap-3">
+                    <Link
+                      href="/compare"
+                      className="inline-flex items-center gap-2 px-4 py-2 rounded-xl glass-panel text-slate-300 hover:text-slate-100 text-xs font-medium border border-white/10"
+                    >
+                      <span>Compare Characters</span>
+                    </Link>
+                    <div className="flex items-center p-1 rounded-xl bg-slate-900/60 border border-white/10">
+                      <button
+                        onClick={() => setViewMode("grid")}
+                        aria-label="Grid view"
+                        className={`p-1.5 rounded-lg transition-all ${
+                          viewMode === "grid"
+                            ? "bg-gold-500/20 text-gold-400"
+                            : "text-slate-400 hover:text-slate-200"
+                        }`}
+                      >
+                        <Grid className="w-4 h-4" />
+                      </button>
+                      <button
+                        onClick={() => setViewMode("list")}
+                        aria-label="List view"
+                        className={`p-1.5 rounded-lg transition-all ${
+                          viewMode === "list"
+                            ? "bg-gold-500/20 text-gold-400"
+                            : "text-slate-400 hover:text-slate-200"
+                        }`}
+                      >
+                        <List className="w-4 h-4" />
+                      </button>
+                    </div>
+                  </div>
+        }
+      />
 
       {/* Filter & Search Bar */}
       <div className="glass-panel p-4 sm:p-5 rounded-2xl border border-white/10 space-y-4">
@@ -255,7 +249,7 @@ export default function CharactersPage() {
               }}
               className={`px-3 py-1.5 rounded-lg border transition-all ${
                 isPov
-                  ? "bg-purple-500/20 text-purple-300 border-purple-500/40"
+                  ? "bg-gold-500/20 text-gold-300 border-gold-500/40"
                   : "bg-slate-800/40 text-slate-400 border-white/5 hover:text-slate-200"
               }`}
             >

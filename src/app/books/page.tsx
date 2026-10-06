@@ -12,6 +12,7 @@ import {
   Sparkles,
 } from "lucide-react";
 import { GlassCard, GlassBadge } from "@/components/ui/glass-card";
+import { PageHeader } from "@/components/ui/page-header";
 import { FavoriteButton } from "@/components/ui/favorite-button";
 import { LoadingSkeleton, EmptyState, ErrorState } from "@/components/ui/states";
 import { Book } from "@/types/api";
@@ -35,24 +36,18 @@ export default function BooksPage() {
   return (
     <div className="space-y-8">
       {/* Header */}
-      <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b border-white/5 pb-6">
-        <div className="space-y-2">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-950/40 border border-emerald-500/20 text-emerald-400 text-xs font-medium">
-            <BookOpen className="w-3.5 h-3.5" />
-            <span>Chronicle Archives & Bibliography</span>
-          </div>
-          <h1 className="text-3xl sm:text-4xl font-bold font-serif text-slate-100">
-            Book Explorer
-          </h1>
-          <p className="text-sm text-slate-400 max-w-2xl">
-            Explore the 12 canonical volumes, novellas, and prequel compilations penned by George R.R. Martin.
-          </p>
-        </div>
-
-        <div className="text-xs text-slate-400 font-mono">
-          <span>{books.length} Volumes Documented</span>
-        </div>
-      </div>
+      <PageHeader
+        icon={BookOpen}
+        badge="Chronicle Archives & Bibliography"
+        title="Book Explorer"
+        description="Explore the 12 canonical volumes, novellas, and prequel compilations penned by George R.R. Martin."
+        tone="emerald"
+        actions={
+                  <div className="text-xs text-slate-400 font-mono">
+                    <span>{books.length} Volumes Documented</span>
+                  </div>
+        }
+      />
 
       {/* Main Books Grid */}
       {isLoading ? (
@@ -109,7 +104,7 @@ export default function BooksPage() {
                       <span>Publisher: {book.publisher}</span>
                     </div>
                     <div className="flex items-center gap-2">
-                      <UserCheck className="w-3.5 h-3.5 text-purple-400" />
+                      <UserCheck className="w-3.5 h-3.5 text-gold-400" />
                       <span>{book.povCharacterIds.length} POV Chapter Leaders</span>
                     </div>
                   </div>

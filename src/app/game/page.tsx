@@ -17,6 +17,7 @@ import {
   BookOpen,
 } from "lucide-react";
 import { GlassCard, GlassBadge } from "@/components/ui/glass-card";
+import { PageHeader } from "@/components/ui/page-header";
 import { TriviaQuestion } from "@/types/api";
 
 export default function GamePage() {
@@ -104,40 +105,32 @@ export default function GamePage() {
   return (
     <div className="space-y-8 max-w-3xl mx-auto">
       {/* Header */}
-      <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 border-b border-white/5 pb-6">
-        <div className="space-y-2">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-gold-950/40 border border-gold-500/20 text-gold-400 text-xs font-medium">
-            <Dices className="w-3.5 h-3.5" />
-            <span>Maester Trivia Trials</span>
-          </div>
-          <h1 className="text-3xl sm:text-4xl font-bold font-serif text-slate-100">
-            Guess the Character
-          </h1>
-          <p className="text-sm text-slate-400">
-            Decipher mystery figures using authentic canonical clues recorded in the Citadel registry.
-          </p>
-        </div>
-
-        {/* Score & Streak Bar */}
-        <div className="flex items-center gap-3">
-          <div className="glass-panel px-3.5 py-2 rounded-xl border border-white/10 flex items-center gap-2 text-xs">
-            <Trophy className="w-4 h-4 text-gold-400" />
-            <div>
-              <span className="text-[10px] text-slate-500 block leading-tight">Score</span>
-              <strong className="text-slate-100 font-mono">{score}</strong>
+      <PageHeader
+        icon={Dices}
+        badge="Maester Trivia Trials"
+        title="Guess the Character"
+        description="Decipher mystery figures using authentic canonical clues recorded in the Citadel registry."
+        actions={
+          <>
+            <div className="glass-panel px-3.5 py-2 rounded-xl border border-white/10 flex items-center gap-2 text-xs">
+              <Trophy className="w-4 h-4 text-gold-400" />
+              <div>
+                <span className="text-[10px] text-slate-500 block leading-tight">Score</span>
+                <strong className="text-slate-100 font-mono">{score}</strong>
+              </div>
             </div>
-          </div>
 
-          <div className="glass-panel px-3.5 py-2 rounded-xl border border-white/10 flex items-center gap-2 text-xs">
-            <Flame className="w-4 h-4 text-orange-400" />
-            <div>
-              <span className="text-[10px] text-slate-500 block leading-tight">Streak</span>
-              <strong className="text-slate-100 font-mono">{streak}</strong>
-              <span className="text-[10px] text-slate-500 ml-1">(Best: {bestStreak})</span>
+            <div className="glass-panel px-3.5 py-2 rounded-xl border border-white/10 flex items-center gap-2 text-xs">
+              <Flame className="w-4 h-4 text-orange-400" />
+              <div>
+                <span className="text-[10px] text-slate-500 block leading-tight">Streak</span>
+                <strong className="text-slate-100 font-mono">{streak}</strong>
+                <span className="text-[10px] text-slate-500 ml-1">(Best: {bestStreak})</span>
+              </div>
             </div>
-          </div>
-        </div>
-      </div>
+          </>
+        }
+      />
 
       {isLoading ? (
         <div className="glass-panel p-12 rounded-2xl border border-white/10 text-center space-y-4">
@@ -159,81 +152,83 @@ export default function GamePage() {
       ) : (
         <div className="space-y-6">
           {/* Clues Card */}
-          <GlassCard className="p-6 sm:p-8 space-y-6">
-            <div className="flex items-center justify-between border-b border-white/5 pb-3">
-              <div className="flex items-center gap-2">
-                <Sparkles className="w-4 h-4 text-gold-400" />
-                <h3 className="font-bold text-base text-slate-100 font-serif">
+          <GlassCard className="p-6 sm:p-8 space-y-6 iron-frame">
+            <div className="flex items-center justify-between border-b border-white/5 pb-4">
+              <div className="flex items-center gap-2.5">
+                <div className="w-8 h-8 rounded-lg bg-gold-500/15 border border-gold-500/30 flex items-center justify-center">
+                  <Sparkles className="w-4 h-4 text-gold-400" />
+                </div>
+                <h3 className="font-bold text-lg text-slate-100 font-display tracking-wide">
                   Mystery Dossier
                 </h3>
               </div>
-              <span className="text-xs font-mono text-slate-400">
-                Clue {unlockedClues} of 3 Available
+              <span className="text-xs font-mono text-slate-400 px-2.5 py-1 rounded-full bg-slate-900/60 border border-white/10">
+                Clue {unlockedClues} <span className="text-slate-600">of</span> 3
               </span>
             </div>
 
             {/* Clue #1 */}
-            <div className="p-4 rounded-xl bg-slate-900/60 border border-white/5 space-y-1">
+            <div className="p-4 rounded-xl bg-slate-900/60 border border-white/5 border-l-2 border-l-gold-500/60 space-y-1.5">
               <span className="text-[10px] font-mono uppercase tracking-widest text-gold-400 font-bold">
-                Clue #1: Demographic Identity
+                Clue #1 · Demographic Identity
               </span>
               <div className="text-sm text-slate-200">
-                Culture: <strong>{question.clues.culture}</strong> · Gender:{" "}
-                <strong>{question.clues.gender}</strong>
+                Culture: <strong className="text-slate-100">{question.clues.culture}</strong> <span className="text-slate-600">·</span> Gender:{" "}
+                <strong className="text-slate-100">{question.clues.gender}</strong>
               </div>
             </div>
 
             {/* Clue #2 */}
             {unlockedClues >= 2 ? (
-              <div className="p-4 rounded-xl bg-slate-900/60 border border-white/5 space-y-1 animate-fade-in">
+              <div className="p-4 rounded-xl bg-slate-900/60 border border-white/5 border-l-2 border-l-blue-500/60 space-y-1.5 animate-fade-in">
                 <span className="text-[10px] font-mono uppercase tracking-widest text-blue-400 font-bold">
-                  Clue #2: Noble Allegiance & Influence
+                  Clue #2 · Noble Allegiance & Influence
                 </span>
                 <div className="text-sm text-slate-200">
                   {question.clues.allegianceNames.length > 0 ? (
                     <>
                       Sworn to:{" "}
-                      <strong>{question.clues.allegianceNames.join(", ")}</strong>
+                      <strong className="text-slate-100">{question.clues.allegianceNames.join(", ")}</strong>
                     </>
                   ) : (
-                    <span>No hereditary house allegiance recorded. Independent or lone figure.</span>
+                    <span className="italic text-slate-400">No hereditary house allegiance recorded. An independent or lone figure.</span>
                   )}
                 </div>
               </div>
             ) : (
               <button
                 onClick={unlockNextClue}
-                className="w-full py-3 rounded-xl border border-dashed border-white/10 hover:border-gold-500/40 text-xs text-slate-400 hover:text-gold-300 transition-all text-center flex items-center justify-center gap-2"
+                className="w-full py-3.5 rounded-xl border border-dashed border-white/10 hover:border-gold-500/40 hover:bg-gold-500/5 text-xs text-slate-400 hover:text-gold-300 transition-all text-center flex items-center justify-center gap-2 group"
               >
-                <HelpCircle className="w-4 h-4" />
-                <span>Unlock Clue #2 (Slightly lowers maximum point reward)</span>
+                <HelpCircle className="w-4 h-4 group-hover:scale-110 transition-transform" />
+                <span>Unlock Clue #2 <span className="text-slate-600">·</span> <span className="text-slate-500">lowers max reward</span></span>
               </button>
             )}
 
             {/* Clue #3 */}
             {unlockedClues >= 3 ? (
-              <div className="p-4 rounded-xl bg-slate-900/60 border border-white/5 space-y-1 animate-fade-in">
-                <span className="text-[10px] font-mono uppercase tracking-widest text-purple-400 font-bold">
-                  Clue #3: Renown, Titles & Chronicles
+              <div className="p-4 rounded-xl bg-slate-900/60 border border-white/5 border-l-2 border-l-emerald-500/60 space-y-1.5 animate-fade-in">
+                <span className="text-[10px] font-mono uppercase tracking-widest text-emerald-400 font-bold">
+                  Clue #3 · Renown, Titles & Chronicles
                 </span>
                 <div className="text-sm text-slate-200 space-y-1">
                   <div>
-                    Documented in <strong>{question.clues.bookAppearancesCount}</strong> canonical
+                    Documented in <strong className="text-slate-100">{question.clues.bookAppearancesCount}</strong> canonical
                     books.
                   </div>
                   {question.clues.titles.length > 0 && (
                     <div>
-                      Known title: <em>{question.clues.titles[0]}</em>
+                      Known title: <em className="text-gold-300">{question.clues.titles[0]}</em>
                     </div>
                   )}
                   {question.clues.aliases.length > 0 && (
                     <div>
-                      Known by the alias: &ldquo;{question.clues.aliases[0]}&rdquo;
+                      Known by the alias: <span className="text-slate-100">&ldquo;{question.clues.aliases[0]}&rdquo;</span>
                     </div>
                   )}
                   {question.clues.actor && (
                     <div>
-                      Portrayed on screen by actor <strong>{question.clues.actor}</strong>.
+                      Portrayed on screen by <strong className="text-slate-100">{question.clues.actor}</strong>.
                     </div>
                   )}
                 </div>
@@ -241,18 +236,19 @@ export default function GamePage() {
             ) : unlockedClues >= 2 ? (
               <button
                 onClick={unlockNextClue}
-                className="w-full py-3 rounded-xl border border-dashed border-white/10 hover:border-gold-500/40 text-xs text-slate-400 hover:text-gold-300 transition-all text-center flex items-center justify-center gap-2"
+                className="w-full py-3.5 rounded-xl border border-dashed border-white/10 hover:border-gold-500/40 hover:bg-gold-500/5 text-xs text-slate-400 hover:text-gold-300 transition-all text-center flex items-center justify-center gap-2 group"
               >
-                <HelpCircle className="w-4 h-4" />
-                <span>Unlock Clue #3 (Final Clue)</span>
+                <HelpCircle className="w-4 h-4 group-hover:scale-110 transition-transform" />
+                <span>Unlock Clue #3 <span className="text-slate-600">·</span> <span className="text-slate-500">final clue</span></span>
               </button>
             ) : null}
           </GlassCard>
 
           {/* Multiple Choice Answers */}
           <div className="space-y-3">
-            <h4 className="text-xs font-mono uppercase tracking-widest text-slate-400 font-semibold">
-              Select the Correct Personage:
+            <h4 className="text-xs font-mono uppercase tracking-widest text-slate-400 font-semibold flex items-center gap-2">
+              <span className="w-1.5 h-1.5 rotate-45 bg-gold-500/70" aria-hidden="true" />
+              Select the Correct Personage
             </h4>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               {question.choices.map((choice) => {
@@ -261,11 +257,11 @@ export default function GamePage() {
                   choice.toLowerCase() === question.correctName.toLowerCase();
 
                 let style =
-                  "glass-panel hover:bg-slate-800/80 text-slate-200 border-white/10";
+                  "glass-panel hover:bg-slate-800/80 hover:border-gold-500/30 hover:-translate-y-0.5 text-slate-200 border-white/10";
                 if (isRevealed) {
                   if (isTheCorrectOne) {
                     style =
-                      "bg-emerald-950/60 border-emerald-500/60 text-emerald-200 font-bold";
+                      "bg-emerald-950/60 border-emerald-500/60 text-emerald-200 font-bold shadow-[0_0_24px_rgba(52,211,153,0.15)]";
                   } else if (isSelected) {
                     style =
                       "bg-red-950/60 border-red-500/60 text-red-200 line-through";
@@ -279,14 +275,14 @@ export default function GamePage() {
                     key={choice}
                     disabled={isRevealed}
                     onClick={() => handleChoice(choice)}
-                    className={`p-4 rounded-xl border text-left font-serif text-sm transition-all flex items-center justify-between ${style}`}
+                    className={`p-4 rounded-xl border text-left font-display text-sm tracking-wide transition-all duration-200 flex items-center justify-between ${style}`}
                   >
                     <span>{choice}</span>
                     {isRevealed && isTheCorrectOne && (
-                      <CheckCircle2 className="w-4 h-4 text-emerald-400" />
+                      <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />
                     )}
                     {isRevealed && isSelected && !isTheCorrectOne && (
-                      <XCircle className="w-4 h-4 text-red-400" />
+                      <XCircle className="w-4 h-4 text-red-400 shrink-0" />
                     )}
                   </button>
                 );

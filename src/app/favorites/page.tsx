@@ -14,6 +14,7 @@ import {
   Compass,
 } from "lucide-react";
 import { GlassCard, GlassBadge } from "@/components/ui/glass-card";
+import { PageHeader } from "@/components/ui/page-header";
 import { FavoriteItem, EntityType } from "@/types/api";
 
 export default function FavoritesPage() {
@@ -103,54 +104,46 @@ export default function FavoritesPage() {
   return (
     <div className="space-y-8 max-w-5xl mx-auto">
       {/* Header */}
-      <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 border-b border-white/5 pb-6">
-        <div className="space-y-2">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-gold-950/40 border border-gold-500/20 text-gold-400 text-xs font-medium">
-            <Bookmark className="w-3.5 h-3.5" />
-            <span>Personal Citadel Council</span>
-          </div>
-          <h1 className="text-3xl sm:text-4xl font-bold font-serif text-slate-100">
-            Bookmarked Entities
-          </h1>
-          <p className="text-sm text-slate-400">
-            Keep track of sworn lords, influential dynasties, and key canonical chronicles.
-          </p>
-        </div>
-
-        {/* Action Controls */}
-        {favorites.length > 0 && (
-          <div className="flex items-center gap-2">
-            <button
-              onClick={exportFavorites}
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg glass-panel hover:bg-slate-800 text-slate-300 text-xs border border-white/10"
-              title="Export Bookmarks as JSON"
-            >
-              <Download className="w-3.5 h-3.5 text-gold-400" />
-              <span>Export</span>
-            </button>
-            <label
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg glass-panel hover:bg-slate-800 text-slate-300 text-xs border border-white/10 cursor-pointer"
-              title="Import Bookmarks from JSON"
-            >
-              <Upload className="w-3.5 h-3.5 text-blue-400" />
-              <span>Import</span>
-              <input
-                type="file"
-                accept=".json"
-                onChange={importFavorites}
-                className="hidden"
-              />
-            </label>
-            <button
-              onClick={clearAllFavorites}
-              className="p-1.5 rounded-lg text-slate-500 hover:text-red-400 transition-colors"
-              title="Clear All Bookmarks"
-            >
-              <Trash2 className="w-4 h-4" />
-            </button>
-          </div>
-        )}
-      </div>
+      <PageHeader
+        icon={Bookmark}
+        badge="Personal Citadel Council"
+        title="Bookmarked Entities"
+        description="Keep track of sworn lords, influential dynasties, and key canonical chronicles."
+        actions={
+          favorites.length > 0 ? (
+            <>
+              <button
+                onClick={exportFavorites}
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg glass-panel hover:bg-slate-800 text-slate-300 text-xs border border-white/10"
+                title="Export Bookmarks as JSON"
+              >
+                <Download className="w-3.5 h-3.5 text-gold-400" />
+                <span>Export</span>
+              </button>
+              <label
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg glass-panel hover:bg-slate-800 text-slate-300 text-xs border border-white/10 cursor-pointer"
+                title="Import Bookmarks from JSON"
+              >
+                <Upload className="w-3.5 h-3.5 text-blue-400" />
+                <span>Import</span>
+                <input
+                  type="file"
+                  accept=".json"
+                  onChange={importFavorites}
+                  className="hidden"
+                />
+              </label>
+              <button
+                onClick={clearAllFavorites}
+                className="p-1.5 rounded-lg text-slate-500 hover:text-red-400 transition-colors"
+                title="Clear All Bookmarks"
+              >
+                <Trash2 className="w-4 h-4" />
+              </button>
+            </>
+          ) : undefined
+        }
+      />
 
       {/* Tabs */}
       <div className="flex items-center gap-2 border-b border-white/5 pb-2 text-xs font-medium">

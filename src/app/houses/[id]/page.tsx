@@ -79,7 +79,7 @@ export default async function HouseDetailPage({ params }: Props) {
       </div>
 
       {/* Header Profile Banner */}
-      <div className="glass-panel p-6 sm:p-8 rounded-2xl border border-white/10 space-y-6">
+      <div className="glass-panel iron-frame p-6 sm:p-8 rounded-2xl space-y-6 parchment-sheen">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div className="space-y-2">
             <div className="flex flex-wrap items-center gap-2">
@@ -94,7 +94,7 @@ export default async function HouseDetailPage({ params }: Props) {
               )}
             </div>
 
-            <h1 className="text-3xl sm:text-5xl font-extrabold font-serif text-slate-100">
+            <h1 className="text-3xl sm:text-5xl font-bold font-display tracking-wide text-slate-100">
               {house.name}
             </h1>
 
@@ -236,7 +236,7 @@ export default async function HouseDetailPage({ params }: Props) {
                     {house.ancestralWeapons.map((weapon) => (
                       <span
                         key={weapon}
-                        className="px-2 py-0.5 rounded bg-purple-950/40 text-purple-300 border border-purple-500/30 font-medium flex items-center gap-1"
+                        className="px-2 py-0.5 rounded bg-slate-800/60 text-slate-200 border border-white/15 font-medium flex items-center gap-1"
                       >
                         <Sword className="w-3 h-3" />
                         {weapon}

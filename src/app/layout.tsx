@@ -1,7 +1,15 @@
 import type { Metadata } from "next";
+import { Cinzel } from "next/font/google";
 import "./globals.css";
 import { Navbar } from "@/components/ui/navbar";
 import { Crown, ShieldAlert } from "lucide-react";
+
+const cinzel = Cinzel({
+  subsets: ["latin"],
+  weight: ["500", "600", "700", "800", "900"],
+  variable: "--font-display",
+  display: "swap",
+});
 
 export const metadata: Metadata = {
   title: "Seven Kingdoms Intelligence — A Song of Ice and Fire Data Exploration",
@@ -27,7 +35,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="dark">
+    <html lang="en" className={`dark ${cinzel.variable}`}>
       <body className="min-h-screen flex flex-col antialiased text-slate-100 bg-[#08090d]">
         {/* Navigation Bar */}
         <Navbar />
@@ -38,12 +46,17 @@ export default function RootLayout({
         </main>
 
         {/* Global Footer */}
-        <footer className="w-full border-t border-white/5 py-10 mt-16 bg-slate-950/60 backdrop-blur-md">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 flex flex-col md:flex-row items-center justify-between gap-6 text-center md:text-left">
+        <footer className="w-full border-t border-white/5 pt-8 pb-10 mt-16 bg-slate-950/60 backdrop-blur-md relative">
+          <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-gold-500/40 to-transparent" aria-hidden="true" />
+          <div className="max-w-7xl mx-auto px-4 sm:px-6">
+            <div className="rune-divider max-w-xs mx-auto mb-8 opacity-70" aria-hidden="true">
+              <span className="rune-diamond" />
+            </div>
+            <div className="flex flex-col md:flex-row items-center justify-between gap-6 text-center md:text-left">
             <div className="flex flex-col items-center md:items-start gap-1">
               <div className="flex items-center gap-2 text-gold-400">
                 <Crown className="w-4 h-4" />
-                <span className="font-mono text-xs uppercase tracking-widest font-semibold">
+                <span className="font-display text-xs uppercase tracking-[0.2em] font-semibold">
                   Seven Kingdoms Intelligence
                 </span>
               </div>
@@ -75,6 +88,7 @@ export default function RootLayout({
               <span className="text-slate-600">WCAG AA Compliant</span>
             </div>
           </div>
+        </div>
         </footer>
       </body>
     </html>

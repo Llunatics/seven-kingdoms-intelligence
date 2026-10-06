@@ -11,16 +11,31 @@ import {
   BarChart3,
   Dices,
   Scale,
-  Sparkles,
   ArrowRight,
   Compass,
   Bookmark,
   RefreshCw,
-  ExternalLink,
 } from "lucide-react";
 import { GlassCard, GlassBadge } from "@/components/ui/glass-card";
 import { FavoriteButton } from "@/components/ui/favorite-button";
 import { Character, AnalyticsSummary } from "@/types/api";
+
+const EMBERS = [
+  { left: "8%", size: 5, duration: 11, delay: 0 },
+  { left: "18%", size: 3, duration: 14, delay: 2.5 },
+  { left: "27%", size: 4, duration: 9, delay: 5 },
+  { left: "36%", size: 3, duration: 13, delay: 1.2 },
+  { left: "47%", size: 6, duration: 10, delay: 3.8 },
+  { left: "55%", size: 3, duration: 15, delay: 6.5 },
+  { left: "64%", size: 4, duration: 12, delay: 0.8 },
+  { left: "72%", size: 3, duration: 9.5, delay: 4.2 },
+  { left: "81%", size: 5, duration: 13.5, delay: 2 },
+  { left: "90%", size: 3, duration: 11.5, delay: 7 },
+  { left: "13%", size: 4, duration: 12.5, delay: 8.5 },
+  { left: "42%", size: 3, duration: 10.5, delay: 9.5 },
+  { left: "60%", size: 5, duration: 14.5, delay: 5.5 },
+  { left: "86%", size: 4, duration: 10, delay: 3 },
+];
 
 export default function HomePage() {
   const [stats, setStats] = useState<AnalyticsSummary | null>(null);
@@ -131,105 +146,129 @@ export default function HomePage() {
   return (
     <div className="space-y-16">
       {/* Hero Section */}
-      <section className="relative pt-6 pb-12 sm:py-16 text-center space-y-6">
-        <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-gold-950/40 border border-gold-500/30 text-gold-400 text-xs font-medium backdrop-blur-md shadow-sm">
-          <Sparkles className="w-3.5 h-3.5" />
-          <span>Citadel Archival Intelligence · An API of Ice and Fire</span>
+      <section className="relative pt-8 pb-14 sm:py-20 text-center overflow-hidden candle-glow">
+        {/* Rising ember particles */}
+        <div className="ember-field" aria-hidden="true">
+          {EMBERS.map((e, i) => (
+            <span
+              key={i}
+              className="ember"
+              style={{
+                left: e.left,
+                width: e.size,
+                height: e.size,
+                animationDuration: `${e.duration}s`,
+                animationDelay: `${e.delay}s`,
+              }}
+            />
+          ))}
         </div>
 
-        <div className="space-y-4 max-w-4xl mx-auto">
-          <h1 className="text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight text-slate-100 font-serif leading-tight">
-            THE SEVEN KINGDOMS, <br />
-            <span className="gold-gradient-text">MAPPED.</span>
-          </h1>
-          <p className="text-base sm:text-lg text-slate-400 max-w-2xl mx-auto leading-relaxed">
-            Explore characters, noble houses, chronicle books, and relationships
-            across the universe of George R.R. Martin&apos;s <em>A Song of Ice and Fire</em>.
-          </p>
-        </div>
+        <div className="relative space-y-7">
+          <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-gold-950/40 border border-gold-500/30 text-gold-300 text-xs font-medium backdrop-blur-md shadow-sm">
+            <span className="w-1.5 h-1.5 rotate-45 bg-gold-400 shadow-[0_0_8px_rgba(223,183,108,0.8)]" />
+            <span className="tracking-wide">Citadel Archival Intelligence · An API of Ice and Fire</span>
+          </div>
 
-        {/* Quick Action Navigation Buttons */}
-        <div className="flex flex-wrap items-center justify-center gap-3 pt-2">
-          <Link
-            href="/characters"
-            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-gold-500 text-slate-950 hover:bg-gold-400 font-semibold text-sm transition-all shadow-lg hover:shadow-gold-500/20"
-          >
-            <Users className="w-4 h-4" />
-            <span>Explore Characters</span>
-          </Link>
-          <Link
-            href="/houses"
-            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl glass-panel hover:bg-slate-800/80 text-slate-200 border border-white/10 font-medium text-sm transition-all"
-          >
-            <Shield className="w-4 h-4 text-gold-400" />
-            <span>Explore Houses</span>
-          </Link>
-          <Link
-            href="/books"
-            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl glass-panel hover:bg-slate-800/80 text-slate-200 border border-white/10 font-medium text-sm transition-all"
-          >
-            <BookOpen className="w-4 h-4 text-emerald-400" />
-            <span>Explore Books</span>
-          </Link>
-          <Link
-            href="/graph"
-            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl glass-panel hover:bg-slate-800/80 text-slate-200 border border-gold-500/30 font-medium text-sm transition-all"
-          >
-            <GitBranch className="w-4 h-4 text-gold-400" />
-            <span>Knowledge Graph</span>
-          </Link>
+          <div className="space-y-5 max-w-4xl mx-auto">
+            <p className="text-xs sm:text-sm font-mono uppercase tracking-[0.35em] text-gold-500/80">
+              A Song of Ice and Fire
+            </p>
+            <h1 className="font-display font-bold tracking-wide text-slate-100 leading-[1.05]">
+              <span className="block text-4xl sm:text-6xl lg:text-7xl">THE SEVEN KINGDOMS</span>
+              <span className="block text-5xl sm:text-7xl lg:text-8xl gold-gradient-text mt-2">MAPPED.</span>
+            </h1>
+            <div className="rune-divider max-w-md mx-auto pt-1" aria-hidden="true">
+              <span className="rune-diamond" />
+            </div>
+            <p className="text-base sm:text-lg text-slate-400 max-w-2xl mx-auto leading-relaxed">
+              Explore characters, noble houses, chronicle books, and relationships
+              across the universe of George R.R. Martin&apos;s{" "}
+              <em className="text-slate-300">A Song of Ice and Fire</em> — charted
+              like a maester&apos;s war-room atlas.
+            </p>
+          </div>
+
+          {/* Quick Action Navigation Buttons */}
+          <div className="flex flex-wrap items-center justify-center gap-3 pt-2">
+            <Link
+              href="/characters"
+              className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-gold-500 text-slate-950 hover:bg-gold-400 font-semibold text-sm transition-all shadow-lg hover:shadow-gold-500/25 hover:-translate-y-0.5"
+            >
+              <Users className="w-4 h-4" />
+              <span>Explore Characters</span>
+            </Link>
+            <Link
+              href="/houses"
+              className="inline-flex items-center gap-2 px-6 py-3 rounded-xl glass-panel hover:bg-slate-800/80 text-slate-200 border border-white/10 font-medium text-sm transition-all hover:-translate-y-0.5"
+            >
+              <Shield className="w-4 h-4 text-gold-400" />
+              <span>Explore Houses</span>
+            </Link>
+            <Link
+              href="/graph"
+              className="inline-flex items-center gap-2 px-6 py-3 rounded-xl glass-panel hover:bg-slate-800/80 text-slate-200 border border-gold-500/30 font-medium text-sm transition-all hover:-translate-y-0.5"
+            >
+              <GitBranch className="w-4 h-4 text-gold-400" />
+              <span>Knowledge Graph</span>
+            </Link>
+          </div>
         </div>
       </section>
 
       {/* World Statistics Overview Dashboard */}
-      <section className="space-y-4">
+      <section className="space-y-5">
         <div className="flex items-center justify-between">
-          <h2 className="text-xs font-mono tracking-widest uppercase text-slate-400 font-semibold">
+          <h2 className="text-sm font-display font-semibold tracking-[0.2em] uppercase text-gold-400">
             Citadel Registry Metrics
           </h2>
           <span className="text-xs text-slate-500 font-mono">100% Canonical Data</span>
         </div>
 
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-          <GlassCard variant="interactive" className="space-y-2">
+          <GlassCard variant="interactive" className="space-y-2 overflow-hidden">
+            <div className="h-px -mx-5 -mt-5 mb-3 bg-gradient-to-r from-transparent via-gold-500/50 to-transparent" />
             <div className="flex items-center justify-between text-slate-400">
               <span className="text-xs font-medium">Characters</span>
               <Users className="w-4 h-4 text-gold-400" />
             </div>
-            <div className="text-2xl sm:text-3xl font-bold text-slate-100 font-serif">
+            <div className="text-2xl sm:text-3xl font-bold text-slate-100 font-display tabular-nums">
               {stats?.totalCharacters.toLocaleString() || "2,134"}
             </div>
             <p className="text-[11px] text-slate-500">Documented figures & aliases</p>
           </GlassCard>
 
-          <GlassCard variant="interactive" className="space-y-2">
+          <GlassCard variant="interactive" className="space-y-2 overflow-hidden">
+            <div className="h-px -mx-5 -mt-5 mb-3 bg-gradient-to-r from-transparent via-blue-500/50 to-transparent" />
             <div className="flex items-center justify-between text-slate-400">
               <span className="text-xs font-medium">Noble Houses</span>
               <Shield className="w-4 h-4 text-blue-400" />
             </div>
-            <div className="text-2xl sm:text-3xl font-bold text-slate-100 font-serif">
+            <div className="text-2xl sm:text-3xl font-bold text-slate-100 font-display tabular-nums">
               {stats?.totalHouses.toLocaleString() || "444"}
             </div>
             <p className="text-[11px] text-slate-500">From the Wall to Dorne</p>
           </GlassCard>
 
-          <GlassCard variant="interactive" className="space-y-2">
+          <GlassCard variant="interactive" className="space-y-2 overflow-hidden">
+            <div className="h-px -mx-5 -mt-5 mb-3 bg-gradient-to-r from-transparent via-emerald-500/50 to-transparent" />
             <div className="flex items-center justify-between text-slate-400">
               <span className="text-xs font-medium">Chronicle Books</span>
               <BookOpen className="w-4 h-4 text-emerald-400" />
             </div>
-            <div className="text-2xl sm:text-3xl font-bold text-slate-100 font-serif">
+            <div className="text-2xl sm:text-3xl font-bold text-slate-100 font-display tabular-nums">
               {stats?.totalBooks || "12"}
             </div>
             <p className="text-[11px] text-slate-500">Canonical novels & novellas</p>
           </GlassCard>
 
-          <GlassCard variant="interactive" className="space-y-2">
+          <GlassCard variant="interactive" className="space-y-2 overflow-hidden">
+            <div className="h-px -mx-5 -mt-5 mb-3 bg-gradient-to-r from-transparent via-gold-500/50 to-transparent" />
             <div className="flex items-center justify-between text-slate-400">
               <span className="text-xs font-medium">POV Characters</span>
-              <Compass className="w-4 h-4 text-purple-400" />
+              <Compass className="w-4 h-4 text-gold-400" />
             </div>
-            <div className="text-2xl sm:text-3xl font-bold text-slate-100 font-serif">
+            <div className="text-2xl sm:text-3xl font-bold text-slate-100 font-display tabular-nums">
               {stats?.povCharactersCount || "31"}
             </div>
             <p className="text-[11px] text-slate-500">Perspective viewpoint leaders</p>
@@ -238,7 +277,7 @@ export default function HomePage() {
       </section>
 
       {/* Featured / Random Character Spotlight */}
-      <section className="glass-panel p-6 sm:p-8 rounded-2xl border border-white/10 space-y-6 relative overflow-hidden">
+      <section className="glass-panel iron-frame p-6 sm:p-8 rounded-2xl space-y-6 relative overflow-hidden parchment-sheen">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-white/5 pb-4">
           <div className="space-y-1">
             <div className="flex items-center gap-2">
@@ -331,14 +370,14 @@ export default function HomePage() {
       </section>
 
       {/* Great Houses Quick Access Strip */}
-      <section className="space-y-4">
+      <section className="space-y-5">
         <div className="flex items-center justify-between">
-          <h2 className="text-xs font-mono tracking-widest uppercase text-slate-400 font-semibold">
+          <h2 className="text-sm font-display font-semibold tracking-[0.2em] uppercase text-gold-400">
             The Great Houses
           </h2>
-          <Link href="/houses" className="text-xs text-gold-400 hover:text-gold-300 flex items-center gap-1">
+          <Link href="/houses" className="text-xs text-gold-400 hover:text-gold-300 flex items-center gap-1 group">
             <span>View all 444 Houses</span>
-            <ArrowRight className="w-3 h-3" />
+            <ArrowRight className="w-3 h-3 group-hover:translate-x-0.5 transition-transform" />
           </Link>
         </div>
 
@@ -364,10 +403,13 @@ export default function HomePage() {
 
       {/* Explore The Realm Intelligence Grid */}
       <section className="space-y-6">
-        <div className="text-center max-w-xl mx-auto space-y-2">
-          <h2 className="text-2xl font-bold font-serif text-slate-100">
+        <div className="text-center max-w-xl mx-auto space-y-3">
+          <h2 className="text-2xl sm:text-3xl font-bold font-display tracking-wide text-slate-100">
             Explore the Realm
           </h2>
+          <div className="rune-divider max-w-xs mx-auto" aria-hidden="true">
+            <span className="rune-diamond" />
+          </div>
           <p className="text-sm text-slate-400">
             Specialized exploration modules engineered for deep genealogical, heraldic, and textual discovery.
           </p>

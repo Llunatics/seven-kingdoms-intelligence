@@ -63,7 +63,7 @@ export default async function BookDetailPage({ params }: Props) {
       </div>
 
       {/* Header Banner */}
-      <div className="glass-panel p-6 sm:p-8 rounded-2xl border border-white/10 space-y-6">
+      <div className="glass-panel iron-frame p-6 sm:p-8 rounded-2xl space-y-6 parchment-sheen">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div className="space-y-2">
             <div className="flex flex-wrap items-center gap-2">
@@ -74,7 +74,7 @@ export default async function BookDetailPage({ params }: Props) {
               <GlassBadge color="green">Published {releaseYear}</GlassBadge>
             </div>
 
-            <h1 className="text-3xl sm:text-5xl font-extrabold font-serif text-slate-100">
+            <h1 className="text-3xl sm:text-5xl font-bold font-display tracking-wide text-slate-100">
               {book.name}
             </h1>
 
@@ -104,7 +104,7 @@ export default async function BookDetailPage({ params }: Props) {
 
           <div className="p-3 rounded-xl bg-slate-900/40 border border-white/5 space-y-1">
             <span className="text-slate-500 block">POV Leaders</span>
-            <span className="text-base font-bold text-purple-400 font-mono">
+            <span className="text-base font-bold text-gold-400 font-mono">
               {book.povCharacterIds.length}
             </span>
           </div>
@@ -129,7 +129,7 @@ export default async function BookDetailPage({ params }: Props) {
       {povCharacters.filter(Boolean).length > 0 && (
         <GlassCard className="space-y-4">
           <div className="flex items-center justify-between border-b border-white/5 pb-2">
-            <h3 className="text-xs font-mono uppercase tracking-widest text-purple-400 font-semibold flex items-center gap-2">
+            <h3 className="text-xs font-mono uppercase tracking-widest text-gold-400 font-semibold flex items-center gap-2">
               <Sparkles className="w-3.5 h-3.5" />
               <span>POV Chapter Leaders ({povCharacters.filter(Boolean).length})</span>
             </h3>
@@ -141,9 +141,9 @@ export default async function BookDetailPage({ params }: Props) {
               <Link
                 key={character!.id}
                 href={`/characters/${character!.id}`}
-                className="p-3.5 rounded-xl bg-purple-950/20 hover:bg-purple-900/30 border border-purple-500/20 hover:border-purple-500/40 transition-all group block"
+                className="p-3.5 rounded-xl bg-gold-950/20 hover:bg-gold-900/30 border border-gold-500/20 hover:border-gold-500/40 transition-all group block"
               >
-                <div className="font-bold text-sm text-slate-100 group-hover:text-purple-300 font-serif">
+                <div className="font-bold text-sm text-slate-100 group-hover:text-gold-300 font-serif">
                   {character!.name || character!.aliases[0]}
                 </div>
                 <p className="text-xs text-slate-400 mt-1 truncate">
