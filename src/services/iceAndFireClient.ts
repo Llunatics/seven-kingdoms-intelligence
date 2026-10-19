@@ -48,36 +48,11 @@ export class IceAndFireClient {
     const cached = cache.get<PaginatedResponse<Character>>(cacheKey);
     if (cached) return cached;
 
-    // If searching by keyword or using any filters, use CanonicalDataService directly.
-    // The external Ice and Fire API only supports strict exact equality for ?name=
-    // (meaning searching "Stark" or "Jon" returns [] on external API because full names are "Eddard Stark", "Jon Snow").
-    if (
-      params.name ||
-      params.culture ||
-      params.gender ||
-      params.isAlive !== undefined ||
-      params.isPov ||
-      params.hasAllegiance ||
-      params.sortBy
-    ) {
-      const result = CanonicalDataService.getCharacters({
-        page,
-        pageSize,
-        search: params.name,
-        culture: params.culture,
-        gender: params.gender,
-        isAlive: params.isAlive,
-        isPov: params.isPov,
-        hasAllegiance: params.hasAllegiance,
-        sortBy: params.sortBy,
-        sortOrder: params.sortOrder,
-      });
-
-      cache.set(cacheKey, result, 3600);
-      return result;
-    }
-
-    // High-performance canonical engine fallback
+    // NOTE: the external Ice and Fire API only supports strict exact equality
+    // for ?name= (searching "Stark" returns [] because full names are
+    // "Eddard Stark"), so all list queries are served by the canonical
+    // dataset. The external API is consulted only for single-entity detail
+    // endpoints (with canonical fallback on failure).
     const result = CanonicalDataService.getCharacters({
       page,
       pageSize,
@@ -173,25 +148,11 @@ export class IceAndFireClient {
     const cached = cache.get<PaginatedResponse<House>>(cacheKey);
     if (cached) return cached;
 
-    // If searching by keyword or using any filters, use CanonicalDataService directly.
-    // The external API only supports exact equality on ?name=, meaning searching "Stark"
-    // returns [] on external API because full name is "House Stark of Winterfell".
-    if (params.name || params.region || params.hasWords || params.hasWeapons || params.sortBy) {
-      const result = CanonicalDataService.getHouses({
-        page,
-        pageSize,
-        search: params.name,
-        region: params.region,
-        hasWords: params.hasWords,
-        hasWeapons: params.hasWeapons,
-        sortBy: params.sortBy,
-        sortOrder: params.sortOrder,
-      });
-
-      cache.set(cacheKey, result, 3600);
-      return result;
-    }
-
+    // NOTE: the external API only supports exact equality on ?name=
+    // (searching "Stark" returns [] because the full name is
+    // "House Stark of Winterfell"), so all list queries are served by the
+    // canonical dataset. The external API is consulted only for
+    // single-entity detail endpoints (with canonical fallback on failure).
     const result = CanonicalDataService.getHouses({
       page,
       pageSize,

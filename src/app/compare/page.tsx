@@ -49,10 +49,10 @@ function CompareContent() {
     } else {
       // Default to Jon Snow (583) and Daenerys Targaryen (271)
       Promise.all([
-        fetch("/api/characters/583").then((r) => r.json()),
-        fetch("/api/characters/271").then((r) => r.json()),
+        fetch("/api/characters/583").then((r) => (r.ok ? r.json() : null)).catch(() => null),
+        fetch("/api/characters/271").then((r) => (r.ok ? r.json() : null)).catch(() => null),
       ]).then(([c1, c2]) => {
-        setSelectedChars([c1, c2]);
+        setSelectedChars([c1, c2].filter((c): c is Character => Boolean(c) && typeof c.id === "number"));
       });
     }
   }, [searchParams]);

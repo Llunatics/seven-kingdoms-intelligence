@@ -130,6 +130,8 @@ export interface AnalyticsSummary {
   povCharactersCount: number;
   cultureDistribution: { name: string; count: number }[];
   regionDistribution: { name: string; count: number }[];
+  genderDistribution: { name: string; value: number }[];
+  greatHouseSwornCounts: { name: string; members: number; region: string }[];
   bookStats: {
     id: number;
     name: string;

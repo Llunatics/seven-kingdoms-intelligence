@@ -15,7 +15,7 @@ Instead of a simple CRUD API demo, this platform provides an immersive, data-ori
 - **Macro Data Analytics Dashboard (`/analytics`)** built with Recharts detailing cultural affinities, regional feudal density, and publication chronology.
 - **Maester Trivia Trials (`/game`)** with progressive authentic clues based exclusively on canonical lore.
 - **Personal Citadel Council (`/favorites`)** with client-side bookmarking, JSON export, and import.
-- **Multi-Tiered Caching & Canonical Data Fallback** ensuring 100% data integrity and zero downtime even under network drops or external API timeouts.
+- **In-Memory Caching & Canonical Data Fallback** ensuring 100% data integrity and zero downtime even under network drops or external API timeouts.
 
 ---
 
@@ -39,8 +39,7 @@ flowchart TD
     subgraph ServerLayer ["Server Layer & API Routes"]
         RouteHandlers["Next.js Route Handlers - /api/*"]
         APIService["Intelligence API Service Layer"]
-        CacheLayer[("Tier 1: In-Memory LRU / Tier 2: Redis")]
-        DB[("Prisma ORM / PostgreSQL")]
+        CacheLayer[("In-Memory LRU Cache (TTL)")]
         FallbackEngine["Canonical Dataset Engine - Joakim Skoog Data"]
     end
 
@@ -55,7 +54,6 @@ flowchart TD
     APIService --> CacheLayer
     APIService -->|External Request with 3.5s Timeout| ExtAPI["An API of Ice and Fire REST API"]
     APIService -.->|Failover on Timeout or Offline| FallbackEngine
-    APIService --> DB
 ```
 
 ---
@@ -70,8 +68,7 @@ flowchart TD
 | **Network Graph** | `@xyflow/react` (React Flow v12) |
 | **Data Analytics** | `recharts` |
 | **Icons & Motion** | `lucide-react`, `framer-motion` |
-| **Database & ORM** | PostgreSQL, Prisma ORM |
-| **Caching** | Server-side In-Memory LRU Cache + Redis support |
+| **Caching** | Server-side In-Memory LRU Cache (TTL) |
 | **Testing** | Vitest, React Testing Library |
 | **Containerization** | Docker, Docker Compose |
 
@@ -92,12 +89,6 @@ To handle network outages, regional Cloudflare IP drops, or rate limits without 
 Create a `.env` file based on `.env.example`:
 
 ```env
-# Database Connection
-DATABASE_URL="postgresql://postgres:postgres@localhost:5432/seven_kingdoms?schema=public"
-
-# Optional Redis Cache (In-memory LRU cache fallback is active by default)
-REDIS_URL="redis://localhost:6379"
-
 # An API of Ice and Fire endpoint
 ICE_AND_FIRE_API_URL="https://anapioficeandfire.com/api"
 
@@ -114,7 +105,7 @@ NODE_ENV="development"
 
 ```bash
 # Clone repository
-git clone https://github.com/example/seven-kingdoms-intelligence.git
+git clone https://github.com/Llunatics/seven-kingdoms-intelligence.git
 cd seven-kingdoms-intelligence
 
 # Install dependencies
@@ -155,8 +146,6 @@ This provisions:
 
 ```
 seven-kingdoms-intelligence/
-├── prisma/
-│   └── schema.prisma         # Prisma database models
 ├── scripts/
 │   ├── fetch-canonical-data.mjs   # Official CSV data ingestion
 │   └── build-canonical-dataset.mjs# Dataset normalization & indexing

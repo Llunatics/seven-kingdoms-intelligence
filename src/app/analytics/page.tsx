@@ -55,24 +55,10 @@ export default function AnalyticsPage() {
     );
   }
 
-  // Major Great Houses sworn member sample for chart
-  const greatHousesData = [
-    { name: "House Stark", members: 79, region: "The North" },
-    { name: "House Frey", members: 62, region: "The Riverlands" },
-    { name: "House Lannister", members: 49, region: "The Westerlands" },
-    { name: "House Targaryen", members: 37, region: "Crownlands" },
-    { name: "House Greyjoy", members: 31, region: "Iron Islands" },
-    { name: "House Baratheon", members: 28, region: "Stormlands" },
-    { name: "House Martell", members: 24, region: "Dorne" },
-    { name: "House Tyrell", members: 21, region: "The Reach" },
-    { name: "House Arryn", members: 16, region: "The Vale" },
-  ];
-
-  const genderData = [
-    { name: "Male", value: 1572 },
-    { name: "Female", value: 436 },
-    { name: "Unspecified", value: 126 },
-  ];
+  // Sworn-member counts per Great House + gender split, computed from the
+  // canonical dataset (summary.json) — never hardcoded.
+  const greatHousesData = data.greatHouseSwornCounts ?? [];
+  const genderData = (data.genderDistribution ?? []).filter((g) => g.value > 0);
 
   return (
     <div className="space-y-10 max-w-7xl mx-auto">

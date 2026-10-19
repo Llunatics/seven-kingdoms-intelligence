@@ -365,6 +365,32 @@ async function build() {
     totalBooks: books.length,
     namedCharacters: characters.filter(c => c.name.length > 0).length,
     povCharactersCount: characters.filter(c => c.povBookIds.length > 0).length,
+    genderDistribution: (() => {
+      let male = 0, female = 0, unspecified = 0;
+      for (const c of characters) {
+        if (c.gender === 'Male') male++;
+        else if (c.gender === 'Female') female++;
+        else unspecified++;
+      }
+      return [
+        { name: 'Male', value: male },
+        { name: 'Female', value: female },
+        { name: 'Unspecified', value: unspecified },
+      ];
+    })(),
+    greatHouseSwornCounts: (() => {
+      // The nine Great Houses of Westeros (canonical IDs)
+      const greatHouseIds = [362, 378, 229, 17, 169, 285, 7, 398, 395];
+      const houseById = new Map(houses.map(h => [h.id, h]));
+      return greatHouseIds
+        .map(id => houseById.get(id))
+        .filter(Boolean)
+        .map(h => ({
+          name: h.name.replace(/^House /, ''),
+          members: h.swornMemberIds.length,
+          region: h.region,
+        }));
+    })(),
     cultureDistribution: Object.entries(cultures)
       .map(([name, count]) => ({ name, count }))
       .sort((a, b) => b.count - a.count)

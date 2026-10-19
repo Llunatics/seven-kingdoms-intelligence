@@ -213,5 +213,66 @@
       "charactersCount": 0,
       "povCharactersCount": 0
     }
+  ],
+  "genderDistribution": [
+    {
+      "name": "Male",
+      "value": 1665
+    },
+    {
+      "name": "Female",
+      "value": 469
+    },
+    {
+      "name": "Unspecified",
+      "value": 0
+    }
+  ],
+  "greatHouseSwornCounts": [
+    {
+      "name": "Stark of Winterfell",
+      "members": 88,
+      "region": "The North"
+    },
+    {
+      "name": "Targaryen of King's Landing",
+      "members": 101,
+      "region": "The Crownlands"
+    },
+    {
+      "name": "Lannister of Casterly Rock",
+      "members": 79,
+      "region": "The Westerlands"
+    },
+    {
+      "name": "Baratheon of Storm's End",
+      "members": 19,
+      "region": "The Stormlands"
+    },
+    {
+      "name": "Greyjoy of Pyke",
+      "members": 42,
+      "region": "Iron Islands"
+    },
+    {
+      "name": "Nymeros Martell of Sunspear",
+      "members": 36,
+      "region": "Dorne"
+    },
+    {
+      "name": "Arryn of the Eyrie",
+      "members": 24,
+      "region": "The Vale"
+    },
+    {
+      "name": "Tyrell of Highgarden",
+      "members": 44,
+      "region": "The Reach"
+    },
+    {
+      "name": "Tully of Riverrun",
+      "members": 17,
+      "region": "The Riverlands"
+    }
   ]
 }
