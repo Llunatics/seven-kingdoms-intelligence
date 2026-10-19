@@ -2,6 +2,8 @@
 
 > A high-performance, dark-first intelligence and data exploration platform for the universe of George R.R. Martin's *A Song of Ice and Fire* / *Game of Thrones*. Built with Next.js 15, React Flow, Recharts, TypeScript, and Tailwind CSS.
 
+**Live:** https://seven-kingdoms.llunaticsys.web.id
+
 ---
 
 ## 🏛️ Project Overview
